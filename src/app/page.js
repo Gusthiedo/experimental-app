@@ -12,21 +12,26 @@ export default function Page() {
   const { user } = useAuthContext();
   const router = useRouter();
 
-  const handleAddData = async () => {
+  // const handleAddData = async () => {
+  (async () => {
     const data = {
       name: "John Snow",
       house: "Stark",
     };
 
-    const { result, error } = await addData("users", "user-id", data);
+    try {
+      const { result, error } = await addData("users", "user-id", data);
 
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Data added successfully");
-      router.push("/success");
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Data added successfully");
+        router.push("/success");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
-  };
+  })();
 
   return (
     <div className="container">
